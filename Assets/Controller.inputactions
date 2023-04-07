@@ -2,17 +2,17 @@
     "name": "Controller",
     "maps": [
         {
-            "name": "Gamplay",
+            "name": "Gameplay",
             "id": "faa6ff80-3f95-4b14-b076-6d24c1fc862b",
             "actions": [
                 {
                     "name": "move",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "5c048d79-e82f-4659-bd61-72ff75486cb3",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -39,7 +39,7 @@
                 {
                     "name": "",
                     "id": "58f91181-4170-404a-9376-313cc4f242b7",
-                    "path": "",
+                    "path": "<XRController>{LeftHand}/joystick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
