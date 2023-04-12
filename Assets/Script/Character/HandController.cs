@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class ControllerManager : MonoBehaviour
+public class HandController : MonoBehaviour
 {
     // this field will contain the actions wrapper instance
     Controller actions;
@@ -13,11 +13,13 @@ public class ControllerManager : MonoBehaviour
         // instantiate the actions wrapper class
         actions = new Controller();
 
+       
     }
 
     void Update()
     {
-       
+        // our update loop polls the "move" action value each frame
+        Vector2 moveVector = actions.Gameplay.move.ReadValue<Vector2>();
     }
 
     private void OnJump(InputAction.CallbackContext context)

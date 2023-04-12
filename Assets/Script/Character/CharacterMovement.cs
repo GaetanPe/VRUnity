@@ -6,8 +6,10 @@ using UnityEngine.InputSystem;
 public class CharacterMovement : MonoBehaviour
 {
     public Controller movementAction;
-    public Rigidbody rb;
-    public Transform playerTransform;
+    public Rigidbody rbCharacter;
+    public Transform characterTransform;
+    [SerializeField] private float speed;
+    Vector3 characterMovement = Vector3.zero;
     void Awake()
     {
         // instantiate the actions wrapper class
@@ -15,16 +17,16 @@ public class CharacterMovement : MonoBehaviour
     }
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        playerTransform = GetComponent<Transform>();
+        rbCharacter = GetComponent<Rigidbody>();
+        characterTransform = GetComponent<Transform>();
     }
 
     void Update()
     {
         Vector2 movementInput = movementAction.Gameplay.move.ReadValue<Vector2>();
-        rb.AddForce(new Vector2(movementInput.x, 0) * 10);
+        characterMovement = new Vector3 (movementInput.x,0,movementInput.y)* speed *Time.deltaTime;
+        rbCharacter.MovePosition(characterTransform.position +characterMovement);
     }
-
     void OnEnable()
     {
         movementAction.Gameplay.Enable();

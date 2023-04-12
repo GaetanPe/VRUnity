@@ -15,24 +15,24 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
-                    "type": "Button",
+                    "name": "CameraRotation",
+                    "type": "Value",
                     "id": "84f824d1-d6ff-4802-9917-3313dde79fd7",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "b6f0672b-96a0-4431-9513-346cefdea8f3",
-                    "path": "",
+                    "path": "<XRController>{RightHand}/joystick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "CameraRotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
