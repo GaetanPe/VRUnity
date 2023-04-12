@@ -1,27 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using System.Linq;
 
-public class SettingsMenu : MonoBehaviour
+public class Panel : MonoBehaviour
 {
     private Canvas canvas = null;
-    private MainMenu mainMenu = null;
+    private SettingsMenu settingsMenu = null;
 
     private void Awake()
     {
         canvas = GetComponent<Canvas>();
     }
 
-    public void Setup(MainMenu mainMenu)
+    public void Setup(SettingsMenu settingsMenu)
     {
-        this.mainMenu = mainMenu;
+        this.settingsMenu = settingsMenu;
         Hide();
     }
 
-    public  void Show()
+    public void Show()
     {
         canvas.enabled = true;
     }

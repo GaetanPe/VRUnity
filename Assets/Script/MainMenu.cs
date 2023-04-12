@@ -1,24 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject settingsMenu;
+    public Transform head;
+    public float spawnDistance = 2;
+    public GameObject menu;
+    public InputActionProperty showButton;
 
-
-    public void PlayGame()
+    void Start()
     {
-        SceneManager.LoadScene("SampleScene");
+        
     }
-    //public void SettingsMenu()
-    //{
-    //    SceneManager.LoadScene("SettingMenu");
-    //}
 
-    public void Exit()
+    void Update()
     {
-        Application.Quit();
+        if(showButton.action.WasPressedThisFrame())
+        {
+            menu.SetActive(!menu.activeSelf);
+            menu.transform.position = head.position + new Vector3(head.forward.x,0,head.forward.z).normalized * spawnDistance;
+        }
     }
 }
