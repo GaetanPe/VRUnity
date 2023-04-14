@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class HandController : MonoBehaviour
 {
+    [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject rightHand;
     // this field will contain the actions wrapper instance
     Controller actions;
 
