@@ -67,7 +67,7 @@
                 {
                     "name": "",
                     "id": "c44dd813-0c17-4888-8274-73fd5bdcd26c",
-                    "path": "<XRController>{LeftHand}/menu",
+                    "path": "<XRController>{RightHand}/menu",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
