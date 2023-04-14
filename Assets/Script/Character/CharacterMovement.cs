@@ -5,10 +5,13 @@ using UnityEngine.InputSystem;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public Controller movementAction;
-    public Rigidbody rbCharacter;
-    public Transform characterTransform;
+    public LayerMask interact;
+    [SerializeField] Transform characterCamera;
+    [SerializeField] Controller movementAction;
+    [SerializeField] Rigidbody rbCharacter;
+    [SerializeField] Transform characterTransform;
     [SerializeField] private float speed;
+    [SerializeField] private float interactionDistance;
     Vector3 characterMovement = Vector3.zero;
     void Awake()
     {
@@ -23,7 +26,15 @@ public class CharacterMovement : MonoBehaviour
 
     void Update()
     {
-        Vector2 movementInput = movementAction.Gameplay.move.ReadValue<Vector2>();
+        Ray interactionRay = new Ray(transform.position, transform.forward);
+        if (Physics.Raycast(interactionRay, out RaycastHit hit, interactionDistance, interact))
+        {
+            InteractableObject interactableObject = hit.transform.GetComponent<InteractableObject>();
+            if (interactableObject != null && movementAction.Gameplay.interaction.ReadValue<bool>()) 
+            {
+            }
+        }
+            Vector2 movementInput = movementAction.Gameplay.move.ReadValue<Vector2>();
         characterMovement = new Vector3 (movementInput.x,0,movementInput.y)* speed *Time.deltaTime;
         rbCharacter.MovePosition(characterTransform.position +characterMovement);
     }

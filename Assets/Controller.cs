@@ -44,6 +44,15 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""b7b572ec-e76e-4e18-b652-fc86224fc824"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -66,6 +75,28 @@ public partial class @Controller: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a69d8dbd-d7b7-4a16-ab8c-b79b6859509f"",
+                    ""path"": ""<XRController>{LeftHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cb73d100-e9e5-4962-a252-73ca68ef94aa"",
+                    ""path"": ""<XRController>{RightHand}/triggerPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""interaction"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -106,6 +137,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_move = m_Gameplay.FindAction("move", throwIfNotFound: true);
         m_Gameplay_CameraRotation = m_Gameplay.FindAction("CameraRotation", throwIfNotFound: true);
+        m_Gameplay_interaction = m_Gameplay.FindAction("interaction", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Newaction = m_Menu.FindAction("New action", throwIfNotFound: true);
@@ -172,12 +204,14 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_move;
     private readonly InputAction m_Gameplay_CameraRotation;
+    private readonly InputAction m_Gameplay_interaction;
     public struct GameplayActions
     {
         private @Controller m_Wrapper;
         public GameplayActions(@Controller wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_Gameplay_move;
         public InputAction @CameraRotation => m_Wrapper.m_Gameplay_CameraRotation;
+        public InputAction @interaction => m_Wrapper.m_Gameplay_interaction;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -193,6 +227,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @CameraRotation.started += instance.OnCameraRotation;
             @CameraRotation.performed += instance.OnCameraRotation;
             @CameraRotation.canceled += instance.OnCameraRotation;
+            @interaction.started += instance.OnInteraction;
+            @interaction.performed += instance.OnInteraction;
+            @interaction.canceled += instance.OnInteraction;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -203,6 +240,9 @@ public partial class @Controller: IInputActionCollection2, IDisposable
             @CameraRotation.started -= instance.OnCameraRotation;
             @CameraRotation.performed -= instance.OnCameraRotation;
             @CameraRotation.canceled -= instance.OnCameraRotation;
+            @interaction.started -= instance.OnInteraction;
+            @interaction.performed -= instance.OnInteraction;
+            @interaction.canceled -= instance.OnInteraction;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -270,6 +310,7 @@ public partial class @Controller: IInputActionCollection2, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnCameraRotation(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
