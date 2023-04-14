@@ -11,6 +11,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] Rigidbody rbCharacter;
     [SerializeField] Transform characterTransform;
     [SerializeField] private float speed;
+    [SerializeField] private bool interactpressed;
     [SerializeField] private float interactionDistance;
     Vector3 characterMovement = Vector3.zero;
     void Awake()
@@ -29,9 +30,11 @@ public class CharacterMovement : MonoBehaviour
         Ray interactionRay = new Ray(transform.position, transform.forward);
         if (Physics.Raycast(interactionRay, out RaycastHit hit, interactionDistance, interact))
         {
+            interactpressed = movementAction.Gameplay.interaction.ReadValue<bool>();
             InteractableObject interactableObject = hit.transform.GetComponent<InteractableObject>();
-            if (interactableObject != null && movementAction.Gameplay.interaction.ReadValue<bool>()) 
+            if (interactableObject != null && interactpressed) 
             {
+                interactableObject.GetComponent<Rigidbody>().AddForce(transform.forward * 100f);
             }
         }
             Vector2 movementInput = movementAction.Gameplay.move.ReadValue<Vector2>();

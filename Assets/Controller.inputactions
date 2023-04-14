@@ -85,7 +85,7 @@
             "id": "3a9431c5-e799-4375-b459-c88e8517acba",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Start",
                     "type": "Button",
                     "id": "f58ffb7d-3a64-4be7-bc09-1a2207a9abf5",
                     "expectedControlType": "Button",
@@ -97,12 +97,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "f280e9f0-b9fd-4ee2-8ead-0e8e2bde9c17",
-                    "path": "",
+                    "id": "c44dd813-0c17-4888-8274-73fd5bdcd26c",
+                    "path": "<XRController>{RightHand}/menu",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Start",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
